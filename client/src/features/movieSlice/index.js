@@ -3,7 +3,9 @@ import axios from 'axios';
 
 export const fetchMovies = createAsyncThunk('movie/fetchMovies', async () => {
   try {
-    const res = await axios.get('http://localhost:5000/api/movie');
+    const res = await axios.get(
+      'https://scottzhu-mern-movie.herokuapp.com/api/movie'
+    );
 
     return res.data;
   } catch (err) {
@@ -15,7 +17,10 @@ export const addNewMovie = createAsyncThunk(
   'movie/addNewMovie',
   async (newMovie) => {
     try {
-      const res = await axios.post('http://localhost:5000/api/movie', newMovie);
+      const res = await axios.post(
+        'https://scottzhu-mern-movie.herokuapp.com/api/movie',
+        newMovie
+      );
 
       return res.data;
     } catch (err) {
@@ -29,10 +34,13 @@ export const updateMovie = createAsyncThunk(
   async (updateFields) => {
     try {
       const { id, description, rating } = updateFields;
-      const res = await axios.patch(`http://localhost:5000/api/movie/${id}`, {
-        description,
-        rating,
-      });
+      const res = await axios.patch(
+        `https://scottzhu-mern-movie.herokuapp.com/api/movie/${id}`,
+        {
+          description,
+          rating,
+        }
+      );
 
       return res.data;
     } catch (err) {
@@ -46,7 +54,9 @@ export const deleteMovie = createAsyncThunk(
   async (movie) => {
     try {
       const { id } = movie;
-      await axios.delete(`http://localhost:5000/api/movie/${id}`);
+      await axios.delete(
+        `https://scottzhu-mern-movie.herokuapp.com/api/movie/${id}`
+      );
 
       return id;
     } catch (err) {
