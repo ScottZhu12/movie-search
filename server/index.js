@@ -4,14 +4,15 @@ const mongoose = require('mongoose');
 const app = require('./app');
 
 // setup environment configuration
-dotenv.config({ path: './config.env' });
+dotenv.config();
 
 // setup port number
 const port = process.env.PORT || 5000;
 
 // connect to MongoDB
 const run = async () => {
-  const Db = process.env.ATLAS_URL;
+  const Db =
+    'mongodb+srv://scott:RY38OTajthUf9kVZ@cluster0.ljxcw.mongodb.net/?retryWrites=true&w=majority';
 
   await mongoose.connect(Db, {
     useNewUrlParser: true,
