@@ -21,12 +21,13 @@ const App = () => {
       <Routes>
         <Route path='/' element={<Layout />}>
           <Route index element={<MovieList />} />
+          <Route path=':movieId' element={<SingleMoviePage />} />
 
           <Route path='create'>
             <Route index element={<AddMovieForm />} />
-            <Route path=':movieId' element={<SingleMoviePage />} />
-            <Route path='edit/:movieId' element={<EditMovieForm />} />
           </Route>
+
+          <Route path='edit/:movieId' element={<EditMovieForm />} />
         </Route>
       </Routes>
     </>

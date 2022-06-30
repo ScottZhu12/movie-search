@@ -27,3 +27,37 @@ exports.createMovie = async (req, res) => {
     });
   }
 };
+
+// update a movie
+exports.updateMovie = async (req, res) => {
+  try {
+    const updatedMovie = await movieModel.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+        new: true,
+      }
+    );
+
+    res.status(200).json(updatedMovie);
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      message: err,
+    });
+  }
+};
+
+// delete a movie
+exports.deleteMovie = async (req, res) => {
+  try {
+    await movieModel.findByIdAndDelete(req.params.id);
+
+    res.status(204).json(null);
+  } catch (err) {
+    res.status(400).json({
+      status: 'error',
+      message: err,
+    });
+  }
+};
