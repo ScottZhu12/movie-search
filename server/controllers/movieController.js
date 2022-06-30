@@ -5,13 +5,7 @@ exports.getAllMovies = async (req, res) => {
   const movies = await movieModel.find({});
 
   try {
-    res.status(200).json({
-      status: 'success',
-      results: movies.length,
-      data: {
-        movies,
-      },
-    });
+    res.status(200).json(movies);
   } catch (err) {
     res.status(404).json({
       status: 'error',
@@ -25,12 +19,7 @@ exports.createMovie = async (req, res) => {
   try {
     const movie = await movieModel.create(req.body);
 
-    res.status(201).json({
-      status: 'success',
-      data: {
-        movie,
-      },
-    });
+    res.status(201).json(movie);
   } catch (err) {
     res.status(400).json({
       status: 'error',

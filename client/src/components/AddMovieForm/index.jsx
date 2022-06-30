@@ -1,24 +1,29 @@
 import React, { useState } from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import axios from 'axios';
+import { useDispatch } from 'react-redux';
+
+import { addNewMovie } from '../../features/movieSlice';
 
 const AddMovieForm = () => {
+  const dispatch = useDispatch();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
-  const [releaseYear, setReleaseYear] = useState('');
+  const [releaseYear, setReleaseYear] = useState(null);
   const [duration, setDuration] = useState('');
   const [rating, setRating] = useState(null);
 
   const onFormSubmit = (e) => {
     e.preventDefault();
 
-    axios.post('http://localhost:5000/api/movie', {
-      title,
-      description,
-      releaseYear,
-      duration,
-      rating,
-    });
+    dispatch(
+      addNewMovie({
+        title,
+        description,
+        releaseYear: Number(releaseYear),
+        duration,
+        rating: Number(rating),
+      })
+    );
   };
 
   return (
@@ -35,6 +40,7 @@ const AddMovieForm = () => {
         value={description}
         onChange={(e) => setDescription(e.target.value)}
         debounceTimeout={300}
+        element='textarea'
       />
 
       <label htmlFor='releaseYear'>Release Year</label>

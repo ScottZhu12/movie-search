@@ -1,13 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Routes, Route } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import Layout from './components/Layout';
 import MovieList from './components/MovieList';
 import AddMovieForm from './components/AddMovieForm';
 import SingleMoviePage from './components/SingleMoviePage';
 import EditMovieForm from './components/EditMovieForm';
+import { fetchMovies } from './features/movieSlice';
 
 const App = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchMovies());
+  }, [dispatch]);
+
   return (
     <>
       <Routes>
